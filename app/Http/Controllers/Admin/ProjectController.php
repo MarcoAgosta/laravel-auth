@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.project.create");
     }
 
     /**
@@ -38,7 +38,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        $project=new Project();
+        $project->name=$data["name"];
+        $project->description=$data["description"];
+        $project->cover_img=$data["cover_img"];
+        $project->github_link=$data["github_link"];
+        $project->save();
+
+        return redirect()->route("admin.projects.show", $project->id);
     }
 
     /**
@@ -49,7 +57,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project=Project::find($id);
+
+        return view("admin.project.show", compact("project"));
     }
 
     /**
@@ -60,7 +70,12 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project=Project::find($id);
+        if(!$project){
+            abort(404, "Ritenta");
+        }
+
+        return view("admin.project.edit", compact("project"));
     }
 
     /**
@@ -72,7 +87,15 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=$request->all();
+        $project=Project::findOrFail($id);
+        $project->name=$data["name"];
+        $project->description=$data["description"];
+        $project->cover_img=$data["cover_img"];
+        $project->github_link=$data["github_link"];
+        $project->save();
+
+        return redirect()->route("admin.projects.show", $project->id);
     }
 
     /**
@@ -83,6 +106,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project=Project::findOrFail($id);
+        $project->delete();
+
+        return redirect()->route("admin.projects.index");
     }
 }

@@ -11,7 +11,7 @@
                     <ul>
                     @foreach ($projects as $project)
                     <li>
-                    {{$project->name}}
+                    <a href="{{route('admin.projects.show', $project->id)}}">{{$project->name}}</a>
                     </li>
                     @endforeach
                     </ul>
