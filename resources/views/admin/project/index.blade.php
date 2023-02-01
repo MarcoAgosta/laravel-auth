@@ -1,5 +1,23 @@
 @extends ('layouts.app')
 
 @section('content')
-Lista random
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Lista Projects</div>
+
+                <div class="card-body">
+                    <ul>
+                    @foreach ($projects as $project)
+                    <li>
+                    {{$project->name}}
+                    </li>
+                    @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
