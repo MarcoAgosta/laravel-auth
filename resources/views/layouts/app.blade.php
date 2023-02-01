@@ -46,11 +46,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
+                    
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @if(Auth::user())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.projects.index')}}">Lista Progetti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.projects.create')}}">Aggiungi Progetto</a>
+                        </li>
+
+                        @endif
                         @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
