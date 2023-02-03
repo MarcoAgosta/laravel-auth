@@ -12,7 +12,7 @@
                     <h1>{{$project->name}}</h1>
                     <p>{{$project->description}}</p>
                     
-                    <img src="{{asset('storage/app/' . $project->cover_img)}}" class="w-100 d-block">
+                    <img src="{{asset('/storage/' . $project->cover_img)}}" class="w-100 d-block">
                     
                     <a>{{$project->github_link}}</a>
 

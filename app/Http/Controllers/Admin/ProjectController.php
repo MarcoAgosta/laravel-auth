@@ -43,7 +43,7 @@ class ProjectController extends Controller
         $data=$request->all();
 
         $path=Storage::put("projects", $data["cover_img"]);
-
+    
         $project=new Project();
         $project->name=$data["name"];
         $project->description=$data["description"];
