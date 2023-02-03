@@ -8,9 +8,10 @@
                 <div class="card-header">Modifica Project</div>
 
                 <div class="card-body">
-                    <form action="{{route('admin.projects.edit', $project->id)}}" method="POST">
-                    @method('PUT')
+                    <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
                     @csrf
+                    @method('PUT')
+                    
                         <div class="mb-3">
                             <label class="form-label">Name</label>
                             <input type="text" class="form-control" name="name" value="{{$project->name}}">

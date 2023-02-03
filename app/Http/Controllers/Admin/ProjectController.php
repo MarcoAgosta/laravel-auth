@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -39,10 +41,13 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data=$request->all();
+
+        $path=Storage::put("projects", $data["cover_img"]);
+
         $project=new Project();
         $project->name=$data["name"];
         $project->description=$data["description"];
-        $project->cover_img=$data["cover_img"];
+        $project->cover_img=$path;
         $project->github_link=$data["github_link"];
         $project->save();
 

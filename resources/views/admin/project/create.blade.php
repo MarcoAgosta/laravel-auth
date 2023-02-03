@@ -8,7 +8,7 @@
                 <div class="card-header">Creazione Project</div>
 
                 <div class="card-body">
-                    <form action="{{route('admin.projects.store')}}" method="POST">
+                    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Name</label>
@@ -22,7 +22,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Cover Img</label>
-                            <input type="text" class="form-control" name="cover_img">
+                            <input type="file" class="form-control" name="cover_img">
                         </div>
 
                         <div class="mb-3">
