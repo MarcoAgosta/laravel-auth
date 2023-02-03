@@ -42,7 +42,7 @@ class ProjectController extends Controller
     {
         $data=$request->all();
 
-        $path=Storage::put("projects", $data["cover_img"]);
+        $path=Storage::disk('public')->put("projects", $data["cover_img"]);
     
         $project=new Project();
         $project->name=$data["name"];
@@ -92,13 +92,23 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data=$request->all();
-        $project=Project::findOrFail($id);
-        $project->name=$data["name"];
-        $project->description=$data["description"];
-        $project->cover_img=$data["cover_img"];
-        $project->github_link=$data["github_link"];
-        $project->save();
+        $project = Project::findOrFail($id);
+        $data = $request->all();
+
+        
+        if (key_exists("cover_img", $data)) {
+            
+            $path=Storage::disk('public')->put("projects", $data["cover_img"]);
+
+            
+            Storage::delete($project->cover_img);
+        }
+
+        $project->update([
+            ...$data,
+            
+            "cover_img" => $path ?? $project->cover_img
+        ]);
 
         return redirect()->route("admin.projects.show", $project->id);
     }

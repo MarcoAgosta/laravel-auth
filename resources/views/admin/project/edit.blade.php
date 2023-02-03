@@ -8,7 +8,7 @@
                 <div class="card-header">Modifica Project</div>
 
                 <div class="card-body">
-                    <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
+                    <form action="{{route('admin.projects.update', $project->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     
@@ -24,7 +24,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Cover Img</label>
-                            <input type="text" class="form-control" name="cover_img" value="{{$project->cover_img}}">
+                            <input type="file" class="form-control" name="cover_img" value="{{$project->cover_img}}">
                         </div>
 
                         <div class="mb-3">
